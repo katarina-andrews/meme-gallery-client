@@ -1,35 +1,47 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from "react";
+import "./App.css";
+import { api } from "./api";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [memes, setMemes] = useState([]);
+
+  useEffect(() => {
+    api
+      .get("/memes")
+      .then(function (response) {
+        // handle success
+        console.log(response);
+        setMemes(response.data);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
+  }, []);
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <header className="mb-5">
+        <h1 className="font-bold text-4xl">Meme Gallery API</h1>
+      </header>
+      <main className="min-h-[100vw]">
+        <h2>Meme Galley</h2>
+        <div className="flex justify-between flex-auto flex-wrap">
+          {memes.map((meme) => {
+            return (
+              <>
+                <div className="m-3">
+                  <h3>{meme.title}</h3>
+                  <img src={meme.url} alt={meme.title} className="w-54"/>
+                </div>
+              </>
+            );
+          })}
+        </div>
+      </main>
+      <footer className="text-center">&copy; Katarina Andrews</footer>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
