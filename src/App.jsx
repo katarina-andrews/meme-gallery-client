@@ -2,9 +2,11 @@ import "./App.css";
 import { useState } from "react";
 import MemeList from "./components/MemeList";
 import LoginForm from "./components/LoginForm";
+import AddMemeForm from "./components/AddMemeForm";
 
 function App() {
- const [auth, setAuth] = useState(null);
+  const [auth, setAuth] = useState(null);
+  const [memes, setMemes] = useState([]);
 
   return (
     <>
@@ -12,9 +14,15 @@ function App() {
         <h1 className="font-bold text-4xl">Meme Gallery API</h1>
       </header>
       <main className="min-h-[100vw]">
-        {!auth ? <LoginForm setAuth={setAuth} /> : <p>Welcome, {auth.user} </p>}
+        {!auth ? (
+          <LoginForm setAuth={setAuth} />
+        ) : (
+          <p>Welcome, {auth.username} </p>
+        )}
         <h2>Meme Galley</h2>
-        {/* <MemeList /> */}
+
+        {auth?.token && <AddMemeForm setMemes={setMemes} auth={auth} />}
+        <MemeList memes={memes} setMemes={setMemes} />
       </main>
       <footer className="text-center">&copy; Katarina Andrews</footer>
     </>

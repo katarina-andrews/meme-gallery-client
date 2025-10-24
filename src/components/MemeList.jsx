@@ -1,9 +1,7 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { api } from "../api";
 
-export default function MemeList() {
-  const [memes, setMemes] = useState([]);
-
+export default function MemeList({ memes, setMemes }) {
   useEffect(() => {
     api
       .get("/memes")
