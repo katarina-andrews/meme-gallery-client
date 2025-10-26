@@ -5,7 +5,11 @@ import LoginForm from "./components/LoginForm";
 import AddMemeForm from "./components/AddMemeForm";
 
 function App() {
-  const [auth, setAuth] = useState(null);
+  const [auth, setAuth] = useState(() => {
+    const localAuth = localStorage.getItem("auth")
+
+    return localAuth ? JSON.parse(localAuth) : null;
+  });
   const [memes, setMemes] = useState([]);
 
   return (
@@ -22,7 +26,7 @@ function App() {
         <h2>Meme Galley</h2>
 
         {auth?.token && <AddMemeForm setMemes={setMemes} auth={auth} />}
-        <MemeList memes={memes} setMemes={setMemes} />
+        <MemeList memes={memes} setMemes={setMemes} auth={auth} />
       </main>
       <footer className="text-center">&copy; Katarina Andrews</footer>
     </>

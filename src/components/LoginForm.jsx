@@ -13,6 +13,7 @@ export default function LoginForm({ setAuth }) {
       .then(function (response) {
         console.log(response);
         setAuth(response.data);
+        localStorage.setItem("auth", JSON.stringify(response.data));
       })
       .catch(function (error) {
         console.log(error);
