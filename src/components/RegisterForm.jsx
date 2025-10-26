@@ -1,14 +1,15 @@
-import { useState } from "react";
+import {useState} from "react";
+
 import { api } from "../api";
 
-export default function LoginForm({ setAuth }) {
+export default function RegisterForm({ setAuth }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const loginSubmitHandler = async (event) => {
+  const registerSubmitHandler = async (event) => {
     event.preventDefault();
 
     api
-      .post("/auth/login", {
+      .post("/auth/register", {
         username: event.target.username.value,
         password: event.target.password.value,
       })
@@ -27,13 +28,14 @@ export default function LoginForm({ setAuth }) {
         onClick={() => setIsOpen(true)}
         className="rounded-md bg-gray-950/5 px-3 py-2 text-sm font-semibold text-gray-900 hover:bg-gray-950/10"
       >
-        Login
+        Sign Up
       </button>
 
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
           <div className="relative w-full max-w-md p-4">
             <div className="relative bg-white rounded-lg shadow-lg">
+        
               <div className="flex justify-between items-center p-4 border-b border-gray-200">
                 <h3 className="text-lg font-semibold text-gray-900">Login</h3>
                 <button
@@ -44,7 +46,7 @@ export default function LoginForm({ setAuth }) {
 
               <div className="p-4">
                 <form
-                  onSubmit={loginSubmitHandler}
+                  onSubmit={registerSubmitHandler}
                   className="flex flex-col space-y-4"
                 >
                   <div>

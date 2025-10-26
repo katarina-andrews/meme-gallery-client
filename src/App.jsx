@@ -4,6 +4,7 @@ import MemeList from "./components/MemeList";
 import LoginForm from "./components/LoginForm";
 import AddMemeForm from "./components/AddMemeForm";
 import LogoutBtn from "./components/LogoutBtn";
+import RegisterForm from "./components/RegisterForm";
 
 function App() {
   const [auth, setAuth] = useState(() => {
@@ -24,6 +25,7 @@ function App() {
         ) : (
           <p>Welcome, {auth.username} </p>
         )}
+        {!auth ? <RegisterForm setAuth={setAuth} /> : null}
         {auth ? <LogoutBtn /> : null}
 
         <h2>Meme Galley</h2>
