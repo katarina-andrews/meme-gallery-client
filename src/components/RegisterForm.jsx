@@ -1,4 +1,4 @@
-import {useState} from "react";
+import { useState } from "react";
 
 import { api } from "../api";
 
@@ -35,13 +35,14 @@ export default function RegisterForm({ setAuth }) {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
           <div className="relative w-full max-w-md p-4">
             <div className="relative bg-white rounded-lg shadow-lg">
-        
               <div className="flex justify-between items-center p-4 border-b border-gray-200">
                 <h3 className="text-lg font-semibold text-gray-900">Login</h3>
                 <button
                   onClick={() => setIsOpen(false)}
                   className="text-gray-400 hover:text-gray-900 text-2xl font-bold"
-                ></button>
+                >
+                  ×
+                </button>
               </div>
 
               <div className="p-4">

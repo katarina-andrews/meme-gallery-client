@@ -39,7 +39,9 @@ export default function LoginForm({ setAuth }) {
                 <button
                   onClick={() => setIsOpen(false)}
                   className="text-gray-400 hover:text-gray-900 text-2xl font-bold"
-                ></button>
+                >
+                  ×
+                </button>
               </div>
 
               <div className="p-4">
