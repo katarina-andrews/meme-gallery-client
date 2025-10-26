@@ -1,6 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { api } from "../api";
+import Masonry from "masonry-layout";
+import imagesLoaded from "imagesloaded";
 import { MdDeleteForever, MdEditDocument } from "react-icons/md";
+
 
 export default function MemeList({ memes, setMemes, auth }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,6 +22,25 @@ export default function MemeList({ memes, setMemes, auth }) {
         console.log(error);
       });
   }, []);
+
+  const gridRef = useRef(null);
+  const msnryRef = useRef(null);
+
+  useEffect(() => {
+    if (!gridRef.current) return;
+
+    msnryRef.current = new Masonry(gridRef.current, {
+      itemSelector: ".grid-item",
+      columnWidth: ".grid-item",
+      percentPosition: true,
+      gutter: 10,
+    });
+
+    imagesLoaded(gridRef.current, () => {
+      msnryRef.current.layout();
+    });
+
+  }, [memes]);
 
   const handleDeleteMeme = async (memeId) => {
     api
@@ -57,34 +79,44 @@ export default function MemeList({ memes, setMemes, auth }) {
   };
 
   return (
-    <section className="flex justify-between flex-auto flex-wrap">
+    <section className="grid" ref={gridRef}>
       {memes.map((meme) => {
         return (
-          <div key={meme.id} className="m-3">
-            <img src={meme.url} alt={meme.title} className="w-54" />
-            <div>
-              <h3>{meme.title}</h3>
-              {auth && auth.id === meme.userId && (
-                <button
-                  onClick={() => handleDeleteMeme(meme.id)}
-                  title="Delete meme"
-                  className="cursor-pointer"
-                >
-                  <MdDeleteForever />
-                </button>
-              )}
-              {auth && auth.id === meme.userId && (
-                <button
-                  onClick={() => {
-                    setEditMeme(meme);
-                    setIsOpen(true);
-                  }}
-                  title="Update meme"
-                  className="cursor-pointer"
-                >
-                  <MdEditDocument />
-                </button>
-              )}
+          <div
+            key={meme.id}
+            className="grid-item m-3 relative overflow-hidden cursor-pointer"
+          >
+            <img
+              src={meme.url}
+              alt={meme.title}
+              loading="lazy"
+              className="w-54 transition-transform duration-300 hover:scale-105"
+            />
+            <div className="absolute top-0 left-0 right-0 bottom-0 flex flex-col justify-center items-center opacity-0 hover:opacity-100 transition-opacity duration-300 bg-black/30 backdrop-blur-sm text-white">
+              <h3 className="text-center break-words w-full max-w-[216px] mb-2">{meme.title}</h3>
+              <div className="flex gap-2">
+                {auth && auth.id === meme.userId && (
+                  <button
+                    onClick={() => handleDeleteMeme(meme.id)}
+                    title="Delete meme"
+                    className="cursor-pointer p-2 rounded hover:bg-opacity-50"
+                  >
+                    <MdDeleteForever />
+                  </button>
+                )}
+                {auth && auth.id === meme.userId && (
+                  <button
+                    onClick={() => {
+                      setEditMeme(meme);
+                      setIsOpen(true);
+                    }}
+                    title="Update meme"
+                    className="cursor-pointer p-2 rounded hover:bg-opacity-50"
+                  >
+                    <MdEditDocument />
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         );

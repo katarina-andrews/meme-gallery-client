@@ -16,24 +16,29 @@ function App() {
 
   return (
     <>
-      <header className="mb-5">
+      <header className="p-3 m-5 flex items-center justify-center">
         <h1 className="font-bold text-4xl">Meme Gallery API</h1>
       </header>
-      <main className="min-h-[100vw]">
-        {!auth ? (
-          <LoginForm setAuth={setAuth} />
-        ) : (
-          <p>Welcome, {auth.username} </p>
-        )}
-        {!auth ? <RegisterForm setAuth={setAuth} /> : null}
-        {auth ? <LogoutBtn /> : null}
+      <main>
+        <section className="p-3 m-5 flex flex-col items-center justify-center gap-3">
+          {!auth ? (
+            <LoginForm setAuth={setAuth} />
+          ) : (
+            <p className="">Welcome, {auth.username} </p>
+          )}
+          {!auth ? <RegisterForm setAuth={setAuth} /> : null}
+          {auth ? <LogoutBtn /> : null}
 
-        <h2>Meme Galley</h2>
-
-        {auth?.token && <AddMemeForm setMemes={setMemes} auth={auth} />}
-        <MemeList memes={memes} setMemes={setMemes} auth={auth} />
+          {auth?.token && <AddMemeForm setMemes={setMemes} auth={auth} />}
+        </section>
+        <section className="min-h-[100vw]">
+          <h2 className="text-3xl text-center p-3">Meme Galley</h2>
+          <MemeList memes={memes} setMemes={setMemes} auth={auth} />
+        </section>
       </main>
-      <footer className="text-center">&copy; Katarina Andrews</footer>
+      <footer className="overline mt-2.5 text-center lowercase tracking-[-1px]">
+        &copy; Katarina Andrews
+      </footer>
     </>
   );
 }
