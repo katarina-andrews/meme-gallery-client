@@ -3,10 +3,11 @@ import { useState } from "react";
 import MemeList from "./components/MemeList";
 import LoginForm from "./components/LoginForm";
 import AddMemeForm from "./components/AddMemeForm";
+import LogoutBtn from "./components/LogoutBtn";
 
 function App() {
   const [auth, setAuth] = useState(() => {
-    const localAuth = localStorage.getItem("auth")
+    const localAuth = localStorage.getItem("auth");
 
     return localAuth ? JSON.parse(localAuth) : null;
   });
@@ -23,6 +24,8 @@ function App() {
         ) : (
           <p>Welcome, {auth.username} </p>
         )}
+        {auth ? <LogoutBtn /> : null}
+
         <h2>Meme Galley</h2>
 
         {auth?.token && <AddMemeForm setMemes={setMemes} auth={auth} />}
