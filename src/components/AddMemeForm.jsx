@@ -33,10 +33,7 @@ export default function AddMemeForm({ setMemes, auth }) {
 
   return (
     <>
-      <button
-        onClick={() => setIsOpen(true)}
-        className="blue-btn"
-      >
+      <button onClick={() => setIsOpen(true)} className="blue-btn">
         Add a Meme
       </button>
 
@@ -45,13 +42,8 @@ export default function AddMemeForm({ setMemes, auth }) {
           <div className="modal-div-2">
             <div className="modal-div-3">
               <div className="modal-div-4">
-                <h3 className="btn-header">
-                  Add a Meme
-                </h3>
-                <button
-                  onClick={() => setIsOpen(false)}
-                  className="x-btn"
-                >
+                <h3 className="btn-header">Add a Meme</h3>
+                <button onClick={() => setIsOpen(false)} className="x-btn">
                   ×
                 </button>
               </div>
@@ -62,10 +54,7 @@ export default function AddMemeForm({ setMemes, auth }) {
                   className="flex flex-col space-y-4"
                 >
                   <div>
-                    <label
-                      htmlFor="title"
-                      className="label-style"
-                    >
+                    <label htmlFor="title" className="label-style">
                       Title
                     </label>
                     <input
@@ -78,10 +67,7 @@ export default function AddMemeForm({ setMemes, auth }) {
                   </div>
 
                   <div>
-                    <label
-                      htmlFor="url"
-                      className="label-style"
-                    >
+                    <label htmlFor="url" className="label-style">
                       URL
                     </label>
                     <input
@@ -93,20 +79,14 @@ export default function AddMemeForm({ setMemes, auth }) {
                     />
                   </div>
 
-                  <button
-                    type="submit"
-                    className="submit-btn"
-                  >
+                  <button type="submit" className="submit-btn">
                     Add Meme
                   </button>
                 </form>
               </div>
 
               <div className="cancel-div">
-                <button
-                  onClick={() => setIsOpen(false)}
-                  className="cancel-btn"
-                >
+                <button onClick={() => setIsOpen(false)} className="cancel-btn">
                   Cancel
                 </button>
               </div>

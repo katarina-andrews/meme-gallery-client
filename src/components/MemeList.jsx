@@ -4,7 +4,6 @@ import Masonry from "masonry-layout";
 import imagesLoaded from "imagesloaded";
 import { MdDeleteForever, MdEditDocument } from "react-icons/md";
 
-
 export default function MemeList({ memes, setMemes, auth }) {
   const [isOpen, setIsOpen] = useState(false);
   const [editMeme, setEditMeme] = useState(null);
@@ -39,7 +38,6 @@ export default function MemeList({ memes, setMemes, auth }) {
     imagesLoaded(gridRef.current, () => {
       masonRef.current.layout();
     });
-
   }, [memes]);
 
   const handleDeleteMeme = async (memeId) => {
@@ -82,10 +80,7 @@ export default function MemeList({ memes, setMemes, auth }) {
     <section className="grid" ref={gridRef}>
       {memes.map((meme) => {
         return (
-          <div
-            key={meme.id}
-            className="grid-item m-3 relative overflow-hidden"
-          >
+          <div key={meme.id} className="grid-item m-3 relative overflow-hidden">
             <img
               src={meme.url}
               alt={meme.title}
@@ -93,7 +88,9 @@ export default function MemeList({ memes, setMemes, auth }) {
               className="w-54 transition-transform duration-300 hover:scale-105"
             />
             <div className="img-hover-style">
-              <h3 className="text-center w-full max-w-[216px] mb-2">{meme.title}</h3>
+              <h3 className="text-center w-full max-w-[216px] mb-2">
+                {meme.title}
+              </h3>
               <div className="flex gap-2">
                 {auth && auth.id === meme.userId && (
                   <button
@@ -126,13 +123,8 @@ export default function MemeList({ memes, setMemes, auth }) {
           <div className="modal-div-2">
             <div className="bg-white rounded-lg shadow-lg">
               <div className="flex justify-between items-center p-4 border-b">
-                <h3 className="btn-header">
-                  Update Meme
-                </h3>
-                <button
-                  onClick={() => setIsOpen(false)}
-                  className="x-btn"
-                >
+                <h3 className="btn-header">Update Meme</h3>
+                <button onClick={() => setIsOpen(false)} className="x-btn">
                   ×
                 </button>
               </div>
@@ -151,49 +143,39 @@ export default function MemeList({ memes, setMemes, auth }) {
                   className="flex flex-col space-y-4"
                 >
                   <div>
-                    <label
-                      htmlFor="title"
-                      className="label-style"
-                    >
+                    <label htmlFor="title" className="label-style">
                       Title
                     </label>
                     <input
                       id="title"
                       name="title"
+                      required
                       defaultValue={editMeme.title}
                       className="input-style"
                     />
                   </div>
 
                   <div>
-                    <label
-                      htmlFor="url"
-                      className="label-style"
-                    >
+                    <label htmlFor="url" className="label-style">
                       URL
                     </label>
                     <input
                       id="url"
                       name="url"
+                      required
                       defaultValue={editMeme.url}
                       className="input-style"
                     />
                   </div>
 
-                  <button
-                    type="submit"
-                    className="submit-btn"
-                  >
+                  <button type="submit" className="submit-btn">
                     Save Changes
                   </button>
                 </form>
               </div>
 
               <div className="cancel-div">
-                <button
-                  onClick={() => setIsOpen(false)}
-                  className="cancel-btn"
-                >
+                <button onClick={() => setIsOpen(false)} className="cancel-btn">
                   Cancel
                 </button>
               </div>

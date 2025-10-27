@@ -9,11 +9,7 @@ export default function LogoutBtn() {
 
   return (
     <div>
-      <button
-        className="blue-btn"
-        type="submit"
-        onClick={handleLogout}
-      >
+      <button className="blue-btn" type="submit" onClick={handleLogout}>
         Logout
       </button>
     </div>

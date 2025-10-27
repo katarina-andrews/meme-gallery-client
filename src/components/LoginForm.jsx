@@ -23,10 +23,7 @@ export default function LoginForm({ setAuth }) {
   };
   return (
     <>
-      <button
-        onClick={() => setIsOpen(true)}
-        className="blue-btn"
-      >
+      <button onClick={() => setIsOpen(true)} className="blue-btn">
         Login
       </button>
 
@@ -36,10 +33,7 @@ export default function LoginForm({ setAuth }) {
             <div className="modal-div-3">
               <div className="modal-div-4">
                 <h3 className="btn-header">Login</h3>
-                <button
-                  onClick={() => setIsOpen(false)}
-                  className="x-btn"
-                >
+                <button onClick={() => setIsOpen(false)} className="x-btn">
                   ×
                 </button>
               </div>
@@ -50,10 +44,7 @@ export default function LoginForm({ setAuth }) {
                   className="flex flex-col space-y-4"
                 >
                   <div>
-                    <label
-                      htmlFor="username"
-                      className="label-style"
-                    >
+                    <label htmlFor="username" className="label-style">
                       Username
                     </label>
                     <input
@@ -66,10 +57,7 @@ export default function LoginForm({ setAuth }) {
                   </div>
 
                   <div>
-                    <label
-                      htmlFor="password"
-                      className="label-style"
-                    >
+                    <label htmlFor="password" className="label-style">
                       Password
                     </label>
                     <input
@@ -81,20 +69,14 @@ export default function LoginForm({ setAuth }) {
                     />
                   </div>
 
-                  <button
-                    type="submit"
-                    className="submit-btn"
-                  >
+                  <button type="submit" className="submit-btn">
                     Submit
                   </button>
                 </form>
               </div>
 
               <div className="cancel-div">
-                <button
-                  onClick={() => setIsOpen(false)}
-                  className="cancel-btn"
-                >
+                <button onClick={() => setIsOpen(false)} className="cancel-btn">
                   Cancel
                 </button>
               </div>

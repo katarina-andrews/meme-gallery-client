@@ -24,10 +24,7 @@ export default function RegisterForm({ setAuth }) {
   };
   return (
     <>
-      <button
-        onClick={() => setIsOpen(true)}
-        className="blue-btn"
-      >
+      <button onClick={() => setIsOpen(true)} className="blue-btn">
         Sign Up
       </button>
 
@@ -36,11 +33,8 @@ export default function RegisterForm({ setAuth }) {
           <div className="modal-div-2">
             <div className="modal-div-3">
               <div className="modal-div-4">
-                <h3 className="btn-header">Login</h3>
-                <button
-                  onClick={() => setIsOpen(false)}
-                  className="x-btn"
-                >
+                <h3 className="btn-header">Sign Up</h3>
+                <button onClick={() => setIsOpen(false)} className="x-btn">
                   ×
                 </button>
               </div>
@@ -51,10 +45,7 @@ export default function RegisterForm({ setAuth }) {
                   className="flex flex-col space-y-4"
                 >
                   <div>
-                    <label
-                      htmlFor="username"
-                      className="label-style"
-                    >
+                    <label htmlFor="username" className="label-style">
                       Username
                     </label>
                     <input
@@ -63,14 +54,12 @@ export default function RegisterForm({ setAuth }) {
                       id="username"
                       required
                       className="input-style"
+                      placeholder="must be at least 3 characters long/alphaneumaric"
                     />
                   </div>
 
                   <div>
-                    <label
-                      htmlFor="password"
-                      className="label-style"
-                    >
+                    <label htmlFor="password" className="label-style">
                       Password
                     </label>
                     <input
@@ -79,23 +68,18 @@ export default function RegisterForm({ setAuth }) {
                       id="password"
                       required
                       className="input-style"
+                      placeholder="must be at least 6 characters long"
                     />
                   </div>
 
-                  <button
-                    type="submit"
-                    className="submit-btn"
-                  >
+                  <button type="submit" className="submit-btn">
                     Submit
                   </button>
                 </form>
               </div>
 
               <div className="cancel-div">
-                <button
-                  onClick={() => setIsOpen(false)}
-                  className="cancel-btn"
-                >
+                <button onClick={() => setIsOpen(false)} className="cancel-btn">
                   Cancel
                 </button>
               </div>
