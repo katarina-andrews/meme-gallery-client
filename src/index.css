@@ -11,8 +11,7 @@
 .cancel-div {
   @apply flex justify-end gap-2 p-4 border-t border-gray-200;
 }
-/* 
-meme list cancel div: flex justify-end p-4 border-t border-gray-200 */
+
 .x-btn {
   @apply cursor-pointer text-gray-400 hover:text-gray-900 text-2xl font-bold;
 }
@@ -35,4 +34,24 @@ meme list cancel div: flex justify-end p-4 border-t border-gray-200 */
 
 .img-hover-style {
   @apply absolute top-0 left-0 right-0 bottom-0 flex flex-col justify-center items-center opacity-0 hover:opacity-100 transition-opacity duration-300 bg-black/30 backdrop-blur-sm text-white;
+}
+
+.modal-div-1 {
+  @apply fixed inset-0 z-50 flex items-center justify-center bg-black/50;
+}
+
+.modal-div-2 {
+  @apply relative w-full max-w-md p-4;
+}
+
+.modal-div-3 {
+  @apply relative bg-white rounded-lg shadow-lg;
+}
+
+.modal-div-4 {
+  @apply flex justify-between items-center p-4 border-b border-gray-200;
+}
+
+.btn-header {
+  @apply text-lg font-semibold text-gray-900;
 }

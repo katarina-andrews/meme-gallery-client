@@ -41,12 +41,11 @@ export default function AddMemeForm({ setMemes, auth }) {
       </button>
 
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="relative w-full max-w-md p-4">
-            <div className="relative bg-white rounded-lg shadow-lg">
-              {/* Modal Header */}
-              <div className="flex justify-between items-center p-4 border-b border-gray-200">
-                <h3 className="text-lg font-semibold text-gray-900">
+        <div className="modal-div-1">
+          <div className="modal-div-2">
+            <div className="modal-div-3">
+              <div className="modal-div-4">
+                <h3 className="btn-header">
                   Add a Meme
                 </h3>
                 <button

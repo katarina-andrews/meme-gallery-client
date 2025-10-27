@@ -24,12 +24,12 @@ export default function MemeList({ memes, setMemes, auth }) {
   }, []);
 
   const gridRef = useRef(null);
-  const msnryRef = useRef(null);
+  const masonRef = useRef(null);
 
   useEffect(() => {
     if (!gridRef.current) return;
 
-    msnryRef.current = new Masonry(gridRef.current, {
+    masonRef.current = new Masonry(gridRef.current, {
       itemSelector: ".grid-item",
       columnWidth: ".grid-item",
       percentPosition: true,
@@ -37,7 +37,7 @@ export default function MemeList({ memes, setMemes, auth }) {
     });
 
     imagesLoaded(gridRef.current, () => {
-      msnryRef.current.layout();
+      masonRef.current.layout();
     });
 
   }, [memes]);
@@ -84,7 +84,7 @@ export default function MemeList({ memes, setMemes, auth }) {
         return (
           <div
             key={meme.id}
-            className="grid-item m-3 relative overflow-hidden cursor-pointer"
+            className="grid-item m-3 relative overflow-hidden"
           >
             <img
               src={meme.url}
@@ -93,13 +93,13 @@ export default function MemeList({ memes, setMemes, auth }) {
               className="w-54 transition-transform duration-300 hover:scale-105"
             />
             <div className="img-hover-style">
-              <h3 className="text-center break-words w-full max-w-[216px] mb-2">{meme.title}</h3>
+              <h3 className="text-center w-full max-w-[216px] mb-2">{meme.title}</h3>
               <div className="flex gap-2">
                 {auth && auth.id === meme.userId && (
                   <button
                     onClick={() => handleDeleteMeme(meme.id)}
                     title="Delete meme"
-                    className="cursor-pointer p-2 rounded hover:bg-opacity-50"
+                    className="cursor-pointer"
                   >
                     <MdDeleteForever />
                   </button>
@@ -111,7 +111,7 @@ export default function MemeList({ memes, setMemes, auth }) {
                       setIsOpen(true);
                     }}
                     title="Update meme"
-                    className="cursor-pointer p-2 rounded hover:bg-opacity-50"
+                    className="cursor-pointer"
                   >
                     <MdEditDocument />
                   </button>
@@ -122,11 +122,11 @@ export default function MemeList({ memes, setMemes, auth }) {
         );
       })}
       {isOpen && editMeme && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="relative w-full max-w-md p-4">
+        <div className="modal-div-1">
+          <div className="modal-div-2">
             <div className="bg-white rounded-lg shadow-lg">
               <div className="flex justify-between items-center p-4 border-b">
-                <h3 className="text-lg font-semibold text-gray-900">
+                <h3 className="btn-header">
                   Update Meme
                 </h3>
                 <button
