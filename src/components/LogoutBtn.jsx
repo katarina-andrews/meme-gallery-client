@@ -10,7 +10,7 @@ export default function LogoutBtn() {
   return (
     <div>
       <button
-        className="cursor-pointer rounded-md bg-blue-700 hover:bg-blue-800 px-3 py-2 text-sm font-semibold text-white"
+        className="blue-btn"
         type="submit"
         onClick={handleLogout}
       >

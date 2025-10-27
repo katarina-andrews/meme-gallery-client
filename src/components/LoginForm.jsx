@@ -25,7 +25,7 @@ export default function LoginForm({ setAuth }) {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="cursor-pointer rounded-md bg-blue-700 hover:bg-blue-800 px-3 py-2 text-sm font-semibold text-white"
+        className="blue-btn"
       >
         Login
       </button>
@@ -38,7 +38,7 @@ export default function LoginForm({ setAuth }) {
                 <h3 className="text-lg font-semibold text-gray-900">Login</h3>
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="text-gray-400 hover:text-gray-900 text-2xl font-bold"
+                  className="x-btn"
                 >
                   ×
                 </button>
@@ -52,7 +52,7 @@ export default function LoginForm({ setAuth }) {
                   <div>
                     <label
                       htmlFor="username"
-                      className="block text-sm font-medium text-gray-900"
+                      className="label-style"
                     >
                       Username
                     </label>
@@ -61,14 +61,14 @@ export default function LoginForm({ setAuth }) {
                       name="username"
                       id="username"
                       required
-                      className="border border-gray-300 p-2 w-full rounded-md focus:ring-blue-500 focus:border-blue-500"
+                      className="input-style"
                     />
                   </div>
 
                   <div>
                     <label
                       htmlFor="password"
-                      className="block text-sm font-medium text-gray-900"
+                      className="label-style"
                     >
                       Password
                     </label>
@@ -77,23 +77,23 @@ export default function LoginForm({ setAuth }) {
                       name="password"
                       id="password"
                       required
-                      className="border border-gray-300 p-2 w-full rounded-md focus:ring-blue-500 focus:border-blue-500"
+                      className="input-style"
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full bg-blue-700 hover:bg-blue-800 text-white font-medium rounded-lg py-2.5 text-sm"
+                    className="submit-btn"
                   >
                     Submit
                   </button>
                 </form>
               </div>
 
-              <div className="flex justify-end gap-2 p-4 border-t border-gray-200">
+              <div className="cancel-div">
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="px-4 py-2 text-sm font-medium bg-gray-100 rounded-md hover:bg-gray-200"
+                  className="cancel-btn"
                 >
                   Cancel
                 </button>
