@@ -7,6 +7,7 @@ import { MdDeleteForever, MdEditDocument } from "react-icons/md";
 export default function MemeList({ memes, setMemes, auth }) {
   const [isOpen, setIsOpen] = useState(false);
   const [editMeme, setEditMeme] = useState(null);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     api
@@ -15,10 +16,17 @@ export default function MemeList({ memes, setMemes, auth }) {
         // handle success
         console.log(response);
         setMemes(response.data);
+        setError("");
       })
       .catch(function (error) {
         // handle error
         console.log(error);
+        setError(
+          error.response?.data?.message ||
+            (error.response?.status === 429
+              ? "Too many requests. Please try again later."
+              : "An unexpected error occurred")
+        );
       });
   }, []);
 
@@ -78,6 +86,7 @@ export default function MemeList({ memes, setMemes, auth }) {
 
   return (
     <section className="grid" ref={gridRef}>
+      {error && <div className="text-red-500 mb-2 text-center">{error}</div>}
       {memes.map((meme) => {
         return (
           <div key={meme.id} className="grid-item m-3 relative overflow-hidden">

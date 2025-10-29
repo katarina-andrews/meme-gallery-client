@@ -21,6 +21,7 @@ function App() {
       </header>
       <main>
         <section className="p-3 m-5 flex flex-col items-center justify-center gap-3">
+          {!auth?.token ? <p>Please login to add and manage memes</p> : null}
           {!auth ? (
             <LoginForm setAuth={setAuth} />
           ) : (

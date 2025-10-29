@@ -4,9 +4,27 @@ import { api } from "../api";
 
 export default function RegisterForm({ setAuth }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [error, setError] = useState("");
 
   const registerSubmitHandler = async (event) => {
     event.preventDefault();
+
+    const username = event.target.username.value;
+    const password = event.target.password.value;
+
+    if (username.length < 3 || !/^[a-zA-Z0-9]+$/.test(username)) {
+      setError(
+        "Username must only contain alphanumeric characters and be at least 3 characters long"
+      );
+      return;
+    }
+
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters long");
+      return;
+    }
+
+    setError("");
 
     api
       .post("/auth/register", {
@@ -24,7 +42,13 @@ export default function RegisterForm({ setAuth }) {
   };
   return (
     <>
-      <button onClick={() => setIsOpen(true)} className="blue-btn">
+      <button
+        onClick={() => {
+          setError("");
+          setIsOpen(true);
+        }}
+        className="blue-btn"
+      >
         Sign Up
       </button>
 
@@ -44,6 +68,7 @@ export default function RegisterForm({ setAuth }) {
                   onSubmit={registerSubmitHandler}
                   className="flex flex-col space-y-4"
                 >
+                  {error && <div className="text-red-500">{error}</div>}{" "}
                   <div>
                     <label htmlFor="username" className="label-style">
                       Username
@@ -54,10 +79,8 @@ export default function RegisterForm({ setAuth }) {
                       id="username"
                       required
                       className="input-style"
-                      placeholder="must be at least 3 characters long/alphaneumaric"
                     />
                   </div>
-
                   <div>
                     <label htmlFor="password" className="label-style">
                       Password
@@ -68,10 +91,8 @@ export default function RegisterForm({ setAuth }) {
                       id="password"
                       required
                       className="input-style"
-                      placeholder="must be at least 6 characters long"
                     />
                   </div>
-
                   <button type="submit" className="submit-btn">
                     Submit
                   </button>

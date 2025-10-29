@@ -3,9 +3,17 @@ import { api } from "../api";
 
 export default function AddMemeForm({ setMemes, auth }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [error, setError] = useState("");
 
   const addMemeFormHandler = async (event) => {
     event.preventDefault();
+
+    try {
+      new URL(event.target.url.value);
+    } catch {
+      setError("Please enter a valid URL");
+      return;
+    }
 
     api
       .post(
@@ -33,7 +41,13 @@ export default function AddMemeForm({ setMemes, auth }) {
 
   return (
     <>
-      <button onClick={() => setIsOpen(true)} className="blue-btn">
+      <button
+        onClick={() => {
+          setError("");
+          setIsOpen(true);
+        }}
+        className="blue-btn"
+      >
         Add a Meme
       </button>
 
@@ -53,6 +67,8 @@ export default function AddMemeForm({ setMemes, auth }) {
                   onSubmit={addMemeFormHandler}
                   className="flex flex-col space-y-4"
                 >
+                  {error && <div className="text-red-500">{error}</div>}{" "}
+                  <div></div>
                   <div>
                     <label htmlFor="title" className="label-style">
                       Title
@@ -65,7 +81,6 @@ export default function AddMemeForm({ setMemes, auth }) {
                       className="input-style"
                     />
                   </div>
-
                   <div>
                     <label htmlFor="url" className="label-style">
                       URL
@@ -78,7 +93,6 @@ export default function AddMemeForm({ setMemes, auth }) {
                       className="input-style"
                     />
                   </div>
-
                   <button type="submit" className="submit-btn">
                     Add Meme
                   </button>
