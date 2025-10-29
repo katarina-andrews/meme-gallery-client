@@ -8,6 +8,7 @@ export default function MemeList({ memes, setMemes, auth }) {
   const [isOpen, setIsOpen] = useState(false);
   const [editMeme, setEditMeme] = useState(null);
   const [error, setError] = useState("");
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     api
@@ -36,7 +37,7 @@ export default function MemeList({ memes, setMemes, auth }) {
   useEffect(() => {
     if (!gridRef.current) return;
 
-    masonRef.current = new Masonry(gridRef.current, {
+    const mason = new Masonry(gridRef.current, {
       itemSelector: ".grid-item",
       columnWidth: ".grid-item",
       percentPosition: true,
@@ -44,8 +45,11 @@ export default function MemeList({ memes, setMemes, auth }) {
     });
 
     imagesLoaded(gridRef.current, () => {
-      masonRef.current.layout();
+      mason.layout();
+      setIsLoaded(true);
     });
+
+    masonRef.current = mason;
   }, [memes]);
 
   const handleDeleteMeme = async (memeId) => {
@@ -85,7 +89,11 @@ export default function MemeList({ memes, setMemes, auth }) {
   };
 
   return (
-    <section className="grid" ref={gridRef}>
+    <section
+      className="grid transition-opacity duration-500"
+      ref={gridRef}
+      style={{ opacity: isLoaded ? 1 : 0 }}
+    >
       {error && <div className="text-red-500 mb-2 text-center">{error}</div>}
       {memes.map((meme) => {
         return (
