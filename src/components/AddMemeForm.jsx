@@ -8,19 +8,29 @@ export default function AddMemeForm({ setMemes, auth }) {
   const addMemeFormHandler = async (event) => {
     event.preventDefault();
 
+    const title = event.target.title.value;
+    const url = event.target.url.value;
+
     try {
-      new URL(event.target.url.value);
+      new URL(url);
     } catch {
       setError("Please enter a valid URL");
       return;
     }
 
+    if (title.length < 3) {
+      setError("Title must be at least 3 characters long");
+      return;
+    }
+
+    setError("");
+
     api
       .post(
         "/memes",
         {
-          title: event.target.title.value,
-          url: event.target.url.value,
+          title,
+          url,
         },
         {
           headers: {

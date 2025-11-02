@@ -52,6 +52,14 @@
   @apply flex justify-between items-center p-4 border-b border-gray-200;
 }
 
-.btn-header {
-  @apply text-lg font-semibold text-gray-900;
+.list-div-1 {
+  @apply columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 [column-fill:balance];
+}
+
+.list-div-2 {
+  @apply break-inside-avoid mb-4 relative overflow-hidden rounded-xl shadow hover:shadow-lg transition-all duration-300;
+}
+
+.list-div-3 {
+  @apply absolute inset-0 bg-black/30 backdrop-blur-sm text-white flex flex-col justify-center items-center opacity-0 hover:opacity-100 transition-opacity duration-300;
 }
