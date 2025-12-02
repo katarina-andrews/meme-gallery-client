@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { api } from "../api";
-import { MdDeleteForever, MdEditDocument } from "react-icons/md";
+import { TrashIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
+import { HeartIcon as HeartOutline } from "@heroicons/react/24/outline";
+import { HeartIcon as HeartSolid } from "@heroicons/react/24/solid";
 
 export default function MemeList({ memes, setMemes, auth }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,7 +15,12 @@ export default function MemeList({ memes, setMemes, auth }) {
       .then(function (response) {
         // handle success
         console.log(response);
-        setMemes(response.data);
+        const memesWithLikedStatus = response.data.map((meme) => ({
+          ...meme,
+          likedByUser: meme.likedByUser || false, 
+        }));
+
+        setMemes(memesWithLikedStatus);
         setError("");
       })
       .catch(function (error) {
@@ -86,6 +93,45 @@ export default function MemeList({ memes, setMemes, auth }) {
       });
   };
 
+  const handleLikeMeme = async (memeId) => {
+    const auth = JSON.parse(localStorage.getItem("auth"));
+    if (!auth?.token) {
+      alert("Please log in to like a meme");
+      return;
+    }
+
+    try {
+      const response = await api.post(
+        `/memes/${memeId}/like`,
+        {},
+        {
+          headers: {
+            authorization: `Bearer ${auth.token}`,
+          },
+        }
+      );
+
+      console.log(response.data);
+
+      // Update local meme list likes
+      setMemes((oldMemes) =>
+        oldMemes.map((meme) => {
+          if (meme.id === memeId) {
+            const isLiked = response.data.message === "Meme liked";
+            const likes = isLiked
+              ? (meme.likes || 0) + 1
+              : (meme.likes || 0) - 1;
+            return { ...meme, likes, likedByUser: isLiked };
+          }
+          return meme;
+        })
+      );
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong while liking the meme.");
+    }
+  };
+
   return (
     <section className="w-full max-w-7xl mx-auto px-4">
       {error && <div className="text-red-500 mb-4 text-center">{error}</div>}
@@ -108,9 +154,9 @@ export default function MemeList({ memes, setMemes, auth }) {
                     <button
                       onClick={() => handleDeleteMeme(meme.id)}
                       title="Delete meme"
-                      className="cursor-pointer"
+                      className="cursor-pointer p-1 text-red-500 hover:text-red-700"
                     >
-                      <MdDeleteForever />
+                      <TrashIcon className="h-5 w-5" />
                     </button>
                   )}
                   {auth && auth.id === meme.userId && (
@@ -121,11 +167,23 @@ export default function MemeList({ memes, setMemes, auth }) {
                         setIsOpen(true);
                       }}
                       title="Update meme"
-                      className="cursor-pointer"
+                      className="cursor-pointer p-1 text-blue-500 hover:text-blue-700"
                     >
-                      <MdEditDocument />
+                      <PencilSquareIcon className="h-5 w-5" />
                     </button>
                   )}
+
+                  <button
+                    onClick={() => handleLikeMeme(meme.id)}
+                    className="cursor-pointer flex items-center space-x-1"
+                  >
+                    {meme.likedByUser ? (
+                      <HeartSolid className="h-6 w-6 text-red-500" />
+                    ) : (
+                      <HeartOutline className="h-6 w-6 text-gray-400" />
+                    )}
+                    <span>{meme.likes || 0}</span>
+                  </button>
                 </div>
               </div>
             </div>
