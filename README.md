@@ -1,6 +1,6 @@
 # Meme Gallery 
 
-A lightweight React frontend for the Meme App project. Users can register, log in, add memes, update memes, delete memes, and like/unlike memes. This frontend communicates with the Express + Prisma backend API.
+A lightweight React frontend for the Meme Gallery App. Users can register, log in, add memes, update memes, delete memes, and like/unlike memes. This frontend communicates with the Express + Prisma backend API.
 
 **Author:** Katarina Andrews
 
